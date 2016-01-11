@@ -7,6 +7,7 @@ var InputMask = require('inputmask-core')
 
 var KEYCODE_Z = 90
 var KEYCODE_Y = 89
+var ENTER = 13
 
 function isUndo(e) {
   return (e.ctrlKey || e.metaKey) && e.keyCode === (e.shiftKey ? KEYCODE_Y : KEYCODE_Z)
@@ -118,8 +119,8 @@ var MaskedInput = React.createClass({
   _onKeyPress(e) {
     // console.log('onKeyPress', JSON.stringify(getSelection(this.input)), e.key, e.target.value)
 
-    // Ignore modified key presses
-    if (e.metaKey || e.altKey || e.ctrlKey) { return }
+    // Ignore modified key presses and enter
+    if (e.metaKey || e.altKey || e.ctrlKey || e.which === ENTER) { return }
 
     e.preventDefault()
     this._updateMaskSelection()
